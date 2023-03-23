@@ -1,0 +1,2 @@
+package hw.ch02;
+// FileProperties 클래스를 구현해 보세요.
