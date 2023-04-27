@@ -38,6 +38,7 @@ public class MultiStringDisplay extends Display {
     private void updatePadding() {
         for (int row = 0; row < body.size(); row++) {
             String line = body.get(row);
+            // 빈 칸을 몇 개 채울까 계산
             int padding = columns - line.length();
             if (padding > 0) {
                 body.set(row, line + spaces(padding));
