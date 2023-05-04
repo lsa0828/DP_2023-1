@@ -56,12 +56,16 @@ public class FrameObserver extends Frame implements Observer, ActionListener {
         super("FrameObserver");
         setLayout(new BorderLayout());
         setBackground(Color.lightGray);
+        
         textGraph.setEditable(false);
         canvasGraph.setSize(500, 500);
+        
         add(textGraph, BorderLayout.NORTH);
         add(canvasGraph, BorderLayout.CENTER);
         add(buttonClose, BorderLayout.SOUTH);
+        
         buttonClose.addActionListener(this);
+        
         pack();
         setVisible(true);
     }
