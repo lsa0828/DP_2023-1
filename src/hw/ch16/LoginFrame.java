@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 public class LoginFrame extends Frame implements ActionListener, Mediator {
     private ColleagueCheckbox checkGuest;
@@ -46,7 +47,7 @@ public class LoginFrame extends Frame implements ActionListener, Mediator {
         add(textPass);
         add(new Label(""));
 
-        add(new Label("SSN"));
+        add(new Label("주민등록번호:"));
         add(textSSN);
         add(new Label(""));
         
@@ -83,16 +84,20 @@ public class LoginFrame extends Frame implements ActionListener, Mediator {
         // Mediator를 설정한다 
         checkGuest.setMediator(this);
         checkLogin.setMediator(this);
+        checkMember.setMediator(this);
         textUser.setMediator(this);
         textPass.setMediator(this);
+        textSSN.setMediator(this);
         buttonOk.setMediator(this);
         buttonCancel.setMediator(this);
 
         // Listener 설정
         checkGuest.addItemListener(checkGuest);
         checkLogin.addItemListener(checkLogin);
+        checkMember.addItemListener(checkMember);
         textUser.addTextListener(textUser);
         textPass.addTextListener(textPass);
+        textSSN.addTextListener(textSSN);
         buttonOk.addActionListener(this);
         buttonCancel.addActionListener(this);
     }
@@ -104,8 +109,9 @@ public class LoginFrame extends Frame implements ActionListener, Mediator {
             // 게스트 로그인 
             textUser.setColleagueEnabled(false);
             textPass.setColleagueEnabled(false);
-            buttonOk.setColleagueEnabled(true);
-        } else {
+            textSSN.setColleagueEnabled(false);
+            buttonOk.setColleagueEnabled(false);
+        } else if (checkMember.getState()) {
             // 사용자 로그인 
             textUser.setColleagueEnabled(true);
             userpassChanged();
@@ -118,12 +124,26 @@ public class LoginFrame extends Frame implements ActionListener, Mediator {
         if (textUser.getText().length() > 0) {
             textPass.setColleagueEnabled(true);
             if (textPass.getText().length() > 0) {
-                buttonOk.setColleagueEnabled(true);
+                textSSN.setColleagueEnabled(true);
+                int i = textSSN.getText().length() - 1;
+                if(Character.isDigit(textSSN.getText().toCharArray()[i]) == false) {
+                    JOptionPane.showMessageDialog(getParent(), "문자는 입력이 안됩니다.", "경고", JOptionPane.WARNING_MESSAGE);
+                    textSSN.setText(textSSN.getText().substring(0, i));
+                    textSSN.setCaretPosition(i);
+                    buttonOk.setColleagueEnabled(false);
+                }
+                if(textSSN.getText().length() == 13) {
+                    buttonOk.setColleagueEnabled(true);
+                } else {
+                    buttonOk.setColleagueEnabled(false);
+                }
             } else {
+                textSSN.setColleagueEnabled(false);
                 buttonOk.setColleagueEnabled(false);
             }
         } else {
             textPass.setColleagueEnabled(false);
+            textSSN.setColleagueEnabled(false);
             buttonOk.setColleagueEnabled(false);
         }
     }
