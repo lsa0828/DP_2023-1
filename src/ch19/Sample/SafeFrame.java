@@ -7,10 +7,11 @@ import java.awt.Frame;
 import java.awt.Panel;
 import java.awt.TextArea;
 import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 
-public class SafeFrame extends Frame implements ActionListener, Context {
+//public class SafeFrame extends Frame implements ActionListener, Context {
+public class SafeFrame extends Frame implements Context {
     private TextField textClock = new TextField(60);		// 현재 시간 표시
     private TextArea textScreen = new TextArea(10, 60);	// 경비 센터 출력
     private Button buttonUse = new Button("Use Safe");	// 금고 사용 버튼
@@ -43,12 +44,13 @@ public class SafeFrame extends Frame implements ActionListener, Context {
         pack();
         setVisible(true);
         // 리스너 설정 
-        buttonUse.addActionListener(this);
-        buttonAlarm.addActionListener(this);
-        buttonPhone.addActionListener(this);
-        buttonExit.addActionListener(this);
+        //buttonUse.addActionListener(this);
+        buttonUse.addActionListener((e) -> {state.doUse(this);});
+        buttonAlarm.addActionListener((e) -> {state.doAlarm(this);});
+        buttonPhone.addActionListener((e) -> {state.doPhone(this);});
+        buttonExit.addActionListener((e) -> {System.exit(0);});
     }
-
+    /*
     // 버튼이 눌리면 여기로 온다
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -65,7 +67,7 @@ public class SafeFrame extends Frame implements ActionListener, Context {
             System.out.println("?");
         }
     }
-
+    */
     // 시간 설정 
     @Override
     public void setClock(int hour) {

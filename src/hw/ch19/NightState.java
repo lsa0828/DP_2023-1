@@ -1,4 +1,4 @@
-package ch19.Sample;
+package hw.ch19;
 
 public class NightState implements State {
     private static NightState singleton = new NightState();
@@ -12,8 +12,10 @@ public class NightState implements State {
 
     @Override
     public void doClock(Context context, int hour) {
-        if (8 <= hour && hour < 21) { // 현재 시각이 주간이면
-            context.changeState(DayState.getInstance()); // 현재 상태를 주간으로 바꿔라
+        if (12 <= hour && hour < 13) {
+            context.changeState(NoonState.getInstance());
+        } else if (9 <= hour && hour < 17) {
+            context.changeState(DayState.getInstance());
         }
     }
 
