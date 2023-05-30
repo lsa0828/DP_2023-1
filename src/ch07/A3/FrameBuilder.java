@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class FrameBuilder extends Builder {
     private JFrame frame = new JFrame();
+    
     private Box box = new Box(BoxLayout.Y_AXIS);
 
     @Override

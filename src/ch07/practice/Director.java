@@ -1,4 +1,4 @@
-package ch07.Sample;
+package ch07.practice;
 
 public class Director {
     private Builder builder;
@@ -10,7 +10,7 @@ public class Director {
 
     // 문서를 만드는 메소드
     public void construct() {
-        builder.makeTitle("Greeting");
+        builder.makeTitle("최승훈");
         
         builder.makeString("일반적인 인사");
         
